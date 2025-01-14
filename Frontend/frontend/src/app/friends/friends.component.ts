@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FriendshipService } from '../Services/friendship-service.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-friends',
@@ -13,9 +14,13 @@ import { CommonModule } from '@angular/common';
   
 })
 export class FriendsComponent implements OnInit {
+  MessageFriend(friendName: string): void {
+    this.router.navigate(['/chat'], { queryParams: { user2Name: friendName } });
+  }
+  
   friends: any[] = [];
 
-  constructor(private friendshipService: FriendshipService) {}
+  constructor(private friendshipService: FriendshipService , private router:Router) {}
 
   ngOnInit(): void {
     this.loadFriends();

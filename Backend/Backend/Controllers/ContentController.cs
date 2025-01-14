@@ -16,7 +16,7 @@ namespace Backend.Controllers
         [HttpGet("MainPage")]
         public async Task<IActionResult> MainPage()
         {
-            var userIdString = HttpContext.Request.Cookies["UserId"];
+            var userIdString = HttpContext.Session.GetString("UserId");
             if (userIdString != null && Guid.TryParse(userIdString, out Guid userId))
             {
                 var posts = await _contentService.GetFriendPosts(userId, 10);

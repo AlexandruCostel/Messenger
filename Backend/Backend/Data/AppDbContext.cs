@@ -68,6 +68,8 @@ namespace Backend.Data
         public DbSet<UserSkill> UserSkill { get; set; }
         public DbSet<Friend> Friend { get; set; }
         public DbSet<FriendRequest> FriendRequest { get; set; }
+        public DbSet<Message> Message { get; set; }
+        public DbSet<Chat> Chat { get; set; }
 
     }
 }

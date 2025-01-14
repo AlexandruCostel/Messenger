@@ -1,11 +1,11 @@
 <div *ngIf="friends.length">
-    <div *ngFor="let friend of friends" class="friend">
-      <span>{{ friend }}</span>
-      <button (click)="deleteFriend(friend)">Șterge</button>
-    </div>
+  <div *ngFor="let friend of friends" class="friend">
+    <span>{{ friend }}</span>
+    <button (click)="deleteFriend(friend)">Delete</button>
+    <button (click)="MessageFriend(friend)">Message Friend</button>
   </div>
-  
-  <div *ngIf="!friends.length">
-    <p>Nu ai prieteni.</p>
-  </div>
-  
+</div>
+
+<div *ngIf="!friends.length">
+  <p>You have no requests.</p>
+</div>

@@ -22,15 +22,8 @@ namespace Backend.Controllers
             {
                 return Unauthorized(new { message = "Invalid credentials" });
             }
-            HttpContext.Response.Cookies.Delete("UserId");
-            HttpContext.Response.Cookies.Append("UserId", userId.Value.ToString(), new CookieOptions
-            {
-                Expires = DateTime.Now.AddDays(1),
-                HttpOnly = true,
-                SameSite = SameSiteMode.Strict,
-                Secure = true
-            });
-
+            HttpContext.Session.Clear();
+            HttpContext.Session.SetString("UserId", userId.Value.ToString());
             return Ok(new { message = "Login successful" });
         }
         [HttpPost("register")]
@@ -46,19 +39,22 @@ namespace Backend.Controllers
         public async Task<IActionResult> Logout()
         {
 
-            HttpContext.Response.Cookies.Delete("UserId");
+            HttpContext.Session.Clear();
             return Ok(new { message = "Register successful" });
 
         }
         [HttpPost("verifyCookie")]
         public async Task<IActionResult> VerifyCookie()
         {
-            string cookieValue = HttpContext.Request.Cookies["UserId"];
-            if (cookieValue != null)
+            var userId = HttpContext.Session.GetString("UserId");
+            if (userId != null)
             {
-                return Ok(new { cookieValue });
+                return Ok(new { UserId = userId });
             }
-            else return BadRequest();
+            else
+            {
+                return Unauthorized(new { message = "Session expired or invalid." });
+            }
 
         }
     }
