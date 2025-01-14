@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators,ReactiveFormsModule } from '@angular/forms';
-import { AuthRequestM } from '../models/auth-request.model';
+import { RegisterRequestM } from '../models/auth-request.model';
 import { AuthService } from '../Services/auth.service';
 import { HttpClientModule } from '@angular/common/http'; //nu merge fara el
 import { Router } from '@angular/router';
@@ -17,6 +17,7 @@ export class RegisterComponent {
   
   RegisterForm = new FormGroup({
     username: new FormControl('', Validators.required),
+    email: new FormControl('',Validators.required),
     password: new FormControl('', Validators.required),
   });
   constructor(private authService: AuthService, private router: Router){};
@@ -27,8 +28,9 @@ export class RegisterComponent {
 
   register(){
     if(this.RegisterForm.invalid) return;
-    const registerRequest: AuthRequestM = {
+    const registerRequest: RegisterRequestM = {
       username: this.RegisterForm.value.username || '',
+      email: this.RegisterForm.value.email || '',
       password: this.RegisterForm.value.password || ''
     };
 
@@ -38,7 +40,7 @@ export class RegisterComponent {
         alert('Register successful');
       },
       (error: any) => {
-        alert('Username is used!');
+        alert('Username or Email is used!');
       }
     );
   }

@@ -1,0 +1,18 @@
+<div *ngIf="!friendRequests.length">
+    <p>Nu ai cereri de prietenie.</p>
+    <input [(ngModel)]="newRequestName" placeholder="Introduceți numele prietenului" />
+    <button (click)="sendFriendRequest()">Trimite cererea de prietenie</button>
+  </div>
+  
+  <div *ngIf="friendRequests.length">
+    <div *ngFor="let request of friendRequests">
+      <p>{{ request }} a trimis o cerere de prietenie.</p>
+      <button (click)="acceptRequest(request)">Acceptă</button>
+      <button (click)="deleteRequest(request)">Respinge</button>
+    </div>
+    <div>
+      <input [(ngModel)]="newRequestName" placeholder="Introduceți numele prietenului" />
+      <button (click)="sendFriendRequest()">Trimite cererea de prietenie</button>
+    </div>
+  </div>
+  

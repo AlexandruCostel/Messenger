@@ -1,0 +1,11 @@
+<div *ngIf="friends.length">
+    <div *ngFor="let friend of friends" class="friend">
+      <span>{{ friend }}</span>
+      <button (click)="deleteFriend(friend)">Șterge</button>
+    </div>
+  </div>
+  
+  <div *ngIf="!friends.length">
+    <p>Nu ai prieteni.</p>
+  </div>
+  

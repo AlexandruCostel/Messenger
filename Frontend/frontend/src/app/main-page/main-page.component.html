@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="search-container">
+      <input type="text" placeholder="Search..." class="search-bar" />
+      <button class="create-post-btn">Create a Post</button>
+    </div>
+    
+    <div class="button-container">
+      <button class="nav-btn" (click)="goToPage('home')">Main Page</button>
+      <button class="nav-btn" (click)="goToFriends('friends')">Friends</button>
+      <button class="nav-btn" (click)="goToAddFriends('friends')">Add Friends</button>
+      <button class="nav-btn" (click)="goToPage('job')">Job Announcements</button>
+      <button class="nav-btn" (click)="goToPage('messages')">Messages</button>
+      <button class="nav-btn" (click)="goToPage('profile')">Profile</button>
+    </div>
+  </div>
+  
+
+
+<div *ngIf="posts.length === 0" class="no-posts">
+    <p>No posts found. Consider adding friends to see their posts!</p>
+  </div>
+  <div *ngFor="let post of posts" class="post">
+    <p>{{ post.content }}</p>
+  </div>
+  

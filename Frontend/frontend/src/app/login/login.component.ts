@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../Services/auth.service';
-import { AuthRequestM } from '../models/auth-request.model';
+import { LoginRequestM } from '../models/auth-request.model';
 import { Router } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http'; 
 
@@ -24,15 +24,14 @@ export class LoginComponent {
   
   login() {
     if (this.loginForm.invalid) return;
-    const loginRequest: AuthRequestM = {
+    const loginRequest: LoginRequestM = {
       username: this.loginForm.value.username || '',
       password: this.loginForm.value.password || ''
     };
 
     this.authService.login(loginRequest).subscribe(
       (response: any) => {
-        //redirectionez undeva
-        alert('Login successful');
+        this.router.navigate(['/main-page']);
       },
       (error: any) => {
         alert('Username or Password is not correct!');

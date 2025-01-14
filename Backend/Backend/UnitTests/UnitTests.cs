@@ -44,9 +44,10 @@ namespace Backend.UnitTests
         public void TestRegister()
         {
             string username = "test";
+            string email = "test@gmail.com";
             string password = "test";
 
-            Task<bool> task = _authService.RegisterUser(username, password);
+            Task<bool> task = _authService.RegisterUser(username,email, password);
             bool result = task.Result;
             Assert.False(result);
 
@@ -57,9 +58,8 @@ namespace Backend.UnitTests
             string username = "test";
             string password = "test";
 
-            Task<bool> task = _authService.Login(username, password);
-            bool result = task.Result;
-            Assert.True(result);
+            Task<Guid?> userID = _authService.Login(username, password);
+            Assert.NotNull(userID);
 
         }
     }
